@@ -226,7 +226,18 @@ class DomoSDKExamples:
         self.logger.info("Retrieved User '" + user.name + "'")
 
         # List Users
-        user_list = users.get(user.id)
+        limit = 100
+        offset = 0
+        
+        user_list = []
+        while True:
+            user_results = users.list(limit, offset)
+            if len(user_results) > 0:
+                user_list.extend(user_results)
+                offset = offset + limit
+            else:
+                break
+        
         self.logger.info("Retrieved a list containing " + str(len(user_list)) + " User(s)")
 
         # Update a User
@@ -261,7 +272,18 @@ class DomoSDKExamples:
         self.logger.info("Retrieved Group '" + group.name + "'")
 
         # List Groups
-        group_list = groups.get(group.id)
+        limit = 100
+        offset = 0
+        
+        group_list = []
+        while True:
+            group_results = groups.list(limit, offset)
+            if len(group_results) > 0:
+                group_list.extend(group_results)
+                offset = offset + limit
+            else:
+                break
+        
         self.logger.info("Retrieved a list containing " + str(len(group_list)) + " Group(s)")
 
         # Update a Group
